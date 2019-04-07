@@ -1,5 +1,4 @@
 from flask import Flask, jsonify
-from gevent.pywsgi import WSGIServer
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 import os
@@ -44,5 +43,5 @@ def getDeals():
 
 
 if __name__ == '__main__':
-    http_server = WSGIServer(('', 8000), app)
-    http_server.serve_forever()
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host='0.0.0.0', port=port)
